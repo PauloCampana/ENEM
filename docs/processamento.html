@@ -192,44 +192,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header><div class="cell" data-hash="processamento_cache/html/unnamed-chunk-1_53d22a36a073e96b5dc8b19a1f835b91">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="processamento_cache/html/unnamed-chunk-2_ac110f91b7452dff20bdc12b4c407857">
+<div class="cell" data-hash="processamento_cache/html/unnamed-chunk-2_19de21969b9f781899233383fdae01e1">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">microdados</span> <span class="op">&lt;-</span> <span class="st">"dados/microdados.csv"</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">vroom</span><span class="fu">::</span><span class="fu"><a href="https://vroom.r-lib.org/reference/vroom.html">vroom</a></span><span class="op">(</span></span>
 <span>        locale <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html">locale</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"ISO-8859-1"</span><span class="op">)</span>,</span>
 <span>        show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>    <span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span></span>
-<span>        Região    <span class="op">=</span> <span class="va">CO_MUNICIPIO_PROVA</span>, </span>
-<span>        Estado    <span class="op">=</span> <span class="va">SG_UF_PROVA</span>, </span>
-<span>        Município <span class="op">=</span> <span class="va">NO_MUNICIPIO_PROVA</span>,</span>
-<span>        Idade     <span class="op">=</span> <span class="va">TP_FAIXA_ETARIA</span>,</span>
-<span>        Sexo      <span class="op">=</span> <span class="va">TP_SEXO</span>, </span>
-<span>        Cor       <span class="op">=</span> <span class="va">TP_COR_RACA</span>,</span>
-<span>        Médio     <span class="op">=</span> <span class="va">TP_ST_CONCLUSAO</span>, </span>
-<span>        Ensino    <span class="op">=</span> <span class="va">TP_ESCOLA</span>, </span>
-<span>        Renda     <span class="op">=</span> <span class="va">Q006</span>, </span>
-<span>        Internet  <span class="op">=</span> <span class="va">Q025</span>,</span>
-<span>        MT        <span class="op">=</span> <span class="va">NU_NOTA_MT</span>, </span>
-<span>        CN        <span class="op">=</span> <span class="va">NU_NOTA_CN</span>, </span>
-<span>        CH        <span class="op">=</span> <span class="va">NU_NOTA_CH</span>, </span>
-<span>        LC        <span class="op">=</span> <span class="va">NU_NOTA_LC</span>,</span>
-<span>        R         <span class="op">=</span> <span class="va">NU_NOTA_REDACAO</span>, </span>
-<span>        R1        <span class="op">=</span> <span class="va">NU_NOTA_COMP1</span>,</span>
-<span>        R2        <span class="op">=</span> <span class="va">NU_NOTA_COMP2</span>,</span>
-<span>        R3        <span class="op">=</span> <span class="va">NU_NOTA_COMP3</span>, </span>
-<span>        R4        <span class="op">=</span> <span class="va">NU_NOTA_COMP4</span>, </span>
-<span>        R5        <span class="op">=</span> <span class="va">NU_NOTA_COMP5</span></span>
+<span>        inscrição      <span class="op">=</span> <span class="va">NU_INSCRICAO</span>,</span>
+<span>        região         <span class="op">=</span> <span class="va">CO_MUNICIPIO_PROVA</span>, </span>
+<span>        estado         <span class="op">=</span> <span class="va">SG_UF_PROVA</span>, </span>
+<span>        município      <span class="op">=</span> <span class="va">NO_MUNICIPIO_PROVA</span>,</span>
+<span>        idade          <span class="op">=</span> <span class="va">TP_FAIXA_ETARIA</span>,</span>
+<span>        sexo           <span class="op">=</span> <span class="va">TP_SEXO</span>, </span>
+<span>        estado_civil   <span class="op">=</span> <span class="va">TP_ESTADO_CIVIL</span>,</span>
+<span>        cor            <span class="op">=</span> <span class="va">TP_COR_RACA</span>,</span>
+<span>        nacionalidade  <span class="op">=</span> <span class="va">TP_NACIONALIDADE</span>,</span>
+<span>        situação_médio <span class="op">=</span> <span class="va">TP_ST_CONCLUSAO</span>,</span>
+<span>        renda          <span class="op">=</span> <span class="va">Q006</span>, </span>
+<span>        internet       <span class="op">=</span> <span class="va">Q025</span>,</span>
+<span>        MT             <span class="op">=</span> <span class="va">NU_NOTA_MT</span>, </span>
+<span>        CN             <span class="op">=</span> <span class="va">NU_NOTA_CN</span>, </span>
+<span>        CH             <span class="op">=</span> <span class="va">NU_NOTA_CH</span>, </span>
+<span>        LC             <span class="op">=</span> <span class="va">NU_NOTA_LC</span>,</span>
+<span>        R              <span class="op">=</span> <span class="va">NU_NOTA_REDACAO</span>, </span>
+<span>        R1             <span class="op">=</span> <span class="va">NU_NOTA_COMP1</span>,</span>
+<span>        R2             <span class="op">=</span> <span class="va">NU_NOTA_COMP2</span>,</span>
+<span>        R3             <span class="op">=</span> <span class="va">NU_NOTA_COMP3</span>, </span>
+<span>        R4             <span class="op">=</span> <span class="va">NU_NOTA_COMP4</span>, </span>
+<span>        R5             <span class="op">=</span> <span class="va">NU_NOTA_COMP5</span></span>
 <span>    <span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">if_all</a></span><span class="op">(</span></span>
+<span>        <span class="va">MT</span><span class="op">:</span><span class="va">R</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>        Região <span class="op">=</span> <span class="va">Região</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substring</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
-<span>            <span class="st">"1"</span> <span class="op">~</span> <span class="st">"Norte"</span>,</span>
-<span>            <span class="st">"2"</span> <span class="op">~</span> <span class="st">"Nordeste"</span>,</span>
-<span>            <span class="st">"3"</span> <span class="op">~</span> <span class="st">"Sudeste"</span>,</span>
-<span>            <span class="st">"4"</span> <span class="op">~</span> <span class="st">"Sul"</span>,</span>
-<span>            <span class="st">"5"</span> <span class="op">~</span> <span class="st">"Centro-Oeste"</span></span>
+<span>        região <span class="op">=</span> <span class="op">(</span><span class="va">região</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%/%</a></span> <span class="fl">1e6</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
+<span>            <span class="fl">1</span> <span class="op">~</span> <span class="st">"Norte"</span>,</span>
+<span>            <span class="fl">2</span> <span class="op">~</span> <span class="st">"Nordeste"</span>,</span>
+<span>            <span class="fl">3</span> <span class="op">~</span> <span class="st">"Sudeste"</span>,</span>
+<span>            <span class="fl">4</span> <span class="op">~</span> <span class="st">"Sul"</span>,</span>
+<span>            <span class="fl">5</span> <span class="op">~</span> <span class="st">"Centro-Oeste"</span></span>
 <span>        <span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        Estado <span class="op">=</span> <span class="va">Estado</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
+<span>        estado <span class="op">=</span> <span class="va">estado</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
 <span>            <span class="st">"AC"</span> <span class="op">~</span> <span class="st">"Acre"</span>,   </span>
 <span>            <span class="st">"AP"</span> <span class="op">~</span> <span class="st">"Amapá"</span>,</span>
 <span>            <span class="st">"AM"</span> <span class="op">~</span> <span class="st">"Amazonas"</span>,</span>
@@ -258,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>            <span class="st">"MT"</span> <span class="op">~</span> <span class="st">"Mato Grosso"</span>,     </span>
 <span>            <span class="st">"MS"</span> <span class="op">~</span> <span class="st">"Mato Grosso do Sul"</span>,</span>
 <span>        <span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        Idade <span class="op">=</span> <span class="va">Idade</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
+<span>        idade <span class="op">=</span> <span class="va">idade</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
 <span>            <span class="fl">1</span>  <span class="op">~</span> <span class="st">"0-17"</span>, </span>
 <span>            <span class="fl">2</span>  <span class="op">~</span> <span class="st">"17"</span>,</span>
 <span>            <span class="fl">3</span>  <span class="op">~</span> <span class="st">"18"</span>,  </span>
@@ -280,31 +284,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>            <span class="fl">19</span> <span class="op">~</span> <span class="st">"66-70"</span>, </span>
 <span>            <span class="fl">20</span> <span class="op">~</span> <span class="st">"70+"</span>,</span>
 <span>        <span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.ordered</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        Sexo <span class="op">=</span> <span class="va">Sexo</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
+<span>        sexo <span class="op">=</span> <span class="va">sexo</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
 <span>            <span class="st">"M"</span> <span class="op">~</span> <span class="st">"Masculino"</span>, </span>
 <span>            <span class="st">"F"</span> <span class="op">~</span> <span class="st">"Feminino"</span></span>
 <span>        <span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        Cor <span class="op">=</span> <span class="va">Cor</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
-<span>            <span class="fl">0</span> <span class="op">~</span> <span class="st">"Não declarado"</span>, </span>
-<span>            <span class="fl">1</span> <span class="op">~</span> <span class="st">"Branca"</span>,       </span>
-<span>            <span class="fl">2</span> <span class="op">~</span> <span class="st">"Preta"</span>,     </span>
-<span>            <span class="fl">3</span> <span class="op">~</span> <span class="st">"Parda"</span>,</span>
-<span>            <span class="fl">4</span> <span class="op">~</span> <span class="st">"Amarela"</span>,    </span>
-<span>            <span class="fl">5</span> <span class="op">~</span> <span class="st">"Indígena"</span>,</span>
-<span>            <span class="fl">6</span> <span class="op">~</span> <span class="st">"Não declarado"</span></span>
+<span>        estado_civil <span class="op">=</span> <span class="va">estado_civil</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
+<span>            <span class="fl">0</span> <span class="op">~</span> <span class="cn">NA</span>,</span>
+<span>            <span class="fl">1</span> <span class="op">~</span> <span class="st">"Solteiro"</span>,</span>
+<span>            <span class="fl">2</span> <span class="op">~</span> <span class="st">"Casado"</span>,</span>
+<span>            <span class="fl">3</span> <span class="op">~</span> <span class="st">"Divorciado"</span>,</span>
+<span>            <span class="fl">4</span> <span class="op">~</span> <span class="st">"Viúvo"</span></span>
 <span>        <span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        Médio <span class="op">=</span> <span class="va">Médio</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
+<span>        cor <span class="op">=</span> <span class="va">cor</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
+<span>            <span class="fl">0</span> <span class="op">~</span> <span class="cn">NA</span>, </span>
+<span>            <span class="fl">1</span> <span class="op">~</span> <span class="st">"Branca"</span>,</span>
+<span>            <span class="fl">2</span> <span class="op">~</span> <span class="st">"Preta"</span>,</span>
+<span>            <span class="fl">3</span> <span class="op">~</span> <span class="st">"Parda"</span>,</span>
+<span>            <span class="fl">4</span> <span class="op">~</span> <span class="st">"Amarela"</span>,</span>
+<span>            <span class="fl">5</span> <span class="op">~</span> <span class="st">"Indígena"</span>,</span>
+<span>            <span class="fl">6</span> <span class="op">~</span> <span class="cn">NA</span></span>
+<span>        <span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        nacionalidade <span class="op">=</span> <span class="va">nacionalidade</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
+<span>            <span class="fl">0</span> <span class="op">~</span> <span class="cn">NA</span>,</span>
+<span>            <span class="fl">1</span> <span class="op">~</span> <span class="st">"Brasileiro"</span>,</span>
+<span>            <span class="fl">2</span> <span class="op">~</span> <span class="st">"Brasileiro naturalizado"</span>,</span>
+<span>            <span class="fl">3</span> <span class="op">~</span> <span class="st">"Estrangeiro"</span>,</span>
+<span>            <span class="fl">4</span> <span class="op">~</span> <span class="st">"Brasileiro nascido no exterior"</span> </span>
+<span>        <span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        situação_médio <span class="op">=</span> <span class="va">situação_médio</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
 <span>            <span class="fl">1</span> <span class="op">~</span> <span class="st">"Concluído"</span>, </span>
-<span>            <span class="fl">2</span> <span class="op">~</span> <span class="st">"Será concluído este ano"</span>,</span>
-<span>            <span class="fl">3</span> <span class="op">~</span> <span class="st">"Cursando"</span>,  </span>
+<span>            <span class="fl">2</span> <span class="op">~</span> <span class="st">"Será concluído em 2021"</span>,</span>
+<span>            <span class="fl">3</span> <span class="op">~</span> <span class="st">"Será concluído após 2021"</span>,  </span>
 <span>            <span class="fl">4</span> <span class="op">~</span> <span class="st">"Não concluíu"</span></span>
 <span>        <span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        Ensino <span class="op">=</span> <span class="va">Ensino</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
-<span>            <span class="fl">2</span> <span class="op">~</span> <span class="st">"Público"</span>,</span>
-<span>            <span class="fl">3</span> <span class="op">~</span> <span class="st">"Privado"</span>, </span>
-<span>            <span class="fl">1</span> <span class="op">~</span> <span class="st">"Não declarado"</span></span>
-<span>        <span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        Renda <span class="op">=</span> <span class="va">Renda</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
+<span>        renda <span class="op">=</span> <span class="va">renda</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
 <span>            <span class="st">"A"</span> <span class="op">~</span> <span class="st">"0"</span>,           </span>
 <span>            <span class="st">"B"</span> <span class="op">~</span> <span class="st">"0-1100"</span>,     </span>
 <span>            <span class="st">"C"</span> <span class="op">~</span> <span class="st">"1100-1650"</span>,</span>
@@ -323,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>            <span class="st">"P"</span> <span class="op">~</span> <span class="st">"16500-22000"</span>,</span>
 <span>            <span class="st">"Q"</span> <span class="op">~</span> <span class="st">"22000+"</span></span>
 <span>        <span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.ordered</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        Internet <span class="op">=</span> <span class="va">Internet</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
+<span>        internet <span class="op">=</span> <span class="va">internet</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html">case_match</a></span><span class="op">(</span></span>
 <span>            <span class="st">"A"</span> <span class="op">~</span> <span class="st">"Não"</span>,</span>
 <span>            <span class="st">"B"</span> <span class="op">~</span> <span class="st">"Sim"</span> </span>
 <span>        <span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -550,145 +563,158 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        Região    <span class="ot">=</span> CO_MUNICIPIO_PROVA, </span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">Estado    =</span> SG_UF_PROVA, </span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        Município <span class="ot">=</span> NO_MUNICIPIO_PROVA,</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">Idade     =</span> TP_FAIXA_ETARIA,</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">Sexo      =</span> TP_SEXO, </span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">Cor       =</span> TP_COR_RACA,</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        Médio     <span class="ot">=</span> TP_ST_CONCLUSAO, </span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">Ensino    =</span> TP_ESCOLA, </span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">Renda     =</span> Q006, </span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">Internet  =</span> Q025,</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">MT        =</span> NU_NOTA_MT, </span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">CN        =</span> NU_NOTA_CN, </span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">CH        =</span> NU_NOTA_CH, </span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">LC        =</span> NU_NOTA_LC,</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">R         =</span> NU_NOTA_REDACAO, </span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">R1        =</span> NU_NOTA_COMP1,</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">R2        =</span> NU_NOTA_COMP2,</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">R3        =</span> NU_NOTA_COMP3, </span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">R4        =</span> NU_NOTA_COMP4, </span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">R5        =</span> NU_NOTA_COMP5</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        Região <span class="ot">=</span> Região <span class="sc">|&gt;</span> <span class="fu">substring</span>(<span class="dv">1</span>,<span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>            <span class="st">"1"</span> <span class="sc">~</span> <span class="st">"Norte"</span>,</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>            <span class="st">"2"</span> <span class="sc">~</span> <span class="st">"Nordeste"</span>,</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>            <span class="st">"3"</span> <span class="sc">~</span> <span class="st">"Sudeste"</span>,</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>            <span class="st">"4"</span> <span class="sc">~</span> <span class="st">"Sul"</span>,</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>            <span class="st">"5"</span> <span class="sc">~</span> <span class="st">"Centro-Oeste"</span></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>(),</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">Estado =</span> Estado <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>            <span class="st">"AC"</span> <span class="sc">~</span> <span class="st">"Acre"</span>,   </span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>            <span class="st">"AP"</span> <span class="sc">~</span> <span class="st">"Amapá"</span>,</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>            <span class="st">"AM"</span> <span class="sc">~</span> <span class="st">"Amazonas"</span>,</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>            <span class="st">"PA"</span> <span class="sc">~</span> <span class="st">"Pará"</span>,</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>            <span class="st">"RO"</span> <span class="sc">~</span> <span class="st">"Rondônia"</span>,</span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>            <span class="st">"RR"</span> <span class="sc">~</span> <span class="st">"Roraima"</span>,</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>            <span class="st">"TO"</span> <span class="sc">~</span> <span class="st">"Tocantins"</span>,</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>            <span class="st">"AL"</span> <span class="sc">~</span> <span class="st">"Alagoas"</span>, </span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>            <span class="st">"BA"</span> <span class="sc">~</span> <span class="st">"Bahia"</span>,</span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>            <span class="st">"CE"</span> <span class="sc">~</span> <span class="st">"Ceará"</span>,</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>            <span class="st">"MA"</span> <span class="sc">~</span> <span class="st">"Maranhão"</span>,</span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>            <span class="st">"PB"</span> <span class="sc">~</span> <span class="st">"Paraíba"</span>, </span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>            <span class="st">"PE"</span> <span class="sc">~</span> <span class="st">"Pernambuco"</span>,</span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>            <span class="st">"PI"</span> <span class="sc">~</span> <span class="st">"Piauí"</span>,     </span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>            <span class="st">"RN"</span> <span class="sc">~</span> <span class="st">"Rio Grande do Norte"</span>,</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SE"</span> <span class="sc">~</span> <span class="st">"Sergipe"</span>,</span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>            <span class="st">"ES"</span> <span class="sc">~</span> <span class="st">"Espírito Santo"</span>,  </span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>            <span class="st">"MG"</span> <span class="sc">~</span> <span class="st">"Minas Gerais"</span>,</span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>            <span class="st">"RJ"</span> <span class="sc">~</span> <span class="st">"Rio de Janeiro"</span>,</span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SP"</span> <span class="sc">~</span> <span class="st">"São Paulo"</span>,</span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>            <span class="st">"PR"</span> <span class="sc">~</span> <span class="st">"Paraná"</span>,         </span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SC"</span> <span class="sc">~</span> <span class="st">"Santa Catarina"</span>,</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>            <span class="st">"RS"</span> <span class="sc">~</span> <span class="st">"Rio Grande do Sul"</span>,</span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>            <span class="st">"DF"</span> <span class="sc">~</span> <span class="st">"Distrito Federal"</span>, </span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>            <span class="st">"GO"</span> <span class="sc">~</span> <span class="st">"Goiás"</span>,</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>            <span class="st">"MT"</span> <span class="sc">~</span> <span class="st">"Mato Grosso"</span>,     </span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>            <span class="st">"MS"</span> <span class="sc">~</span> <span class="st">"Mato Grosso do Sul"</span>,</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>(),</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>        <span class="at">Idade =</span> Idade <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span>  <span class="sc">~</span> <span class="st">"0-17"</span>, </span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span>  <span class="sc">~</span> <span class="st">"17"</span>,</span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>            <span class="dv">3</span>  <span class="sc">~</span> <span class="st">"18"</span>,  </span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>            <span class="dv">4</span>  <span class="sc">~</span> <span class="st">"19"</span>,</span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>            <span class="dv">5</span>  <span class="sc">~</span> <span class="st">"20"</span>,  </span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>            <span class="dv">6</span>  <span class="sc">~</span> <span class="st">"21"</span>,   </span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>            <span class="dv">7</span>  <span class="sc">~</span> <span class="st">"22"</span>,  </span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>            <span class="dv">8</span>  <span class="sc">~</span> <span class="st">"23"</span>,</span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>            <span class="dv">9</span>  <span class="sc">~</span> <span class="st">"24"</span>,  </span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>            <span class="dv">10</span> <span class="sc">~</span> <span class="st">"25"</span>, </span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>            <span class="dv">11</span> <span class="sc">~</span> <span class="st">"26-30"</span>, </span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>            <span class="dv">12</span> <span class="sc">~</span> <span class="st">"31-35"</span>,</span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>            <span class="dv">13</span> <span class="sc">~</span> <span class="st">"36-40"</span>, </span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>            <span class="dv">14</span> <span class="sc">~</span> <span class="st">"41-45"</span>, </span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>            <span class="dv">15</span> <span class="sc">~</span> <span class="st">"46-50"</span>, </span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>            <span class="dv">16</span> <span class="sc">~</span> <span class="st">"51-55"</span>,</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>            <span class="dv">17</span> <span class="sc">~</span> <span class="st">"56-60"</span>,</span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>            <span class="dv">18</span> <span class="sc">~</span> <span class="st">"61-65"</span>, </span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>            <span class="dv">19</span> <span class="sc">~</span> <span class="st">"66-70"</span>, </span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>            <span class="dv">20</span> <span class="sc">~</span> <span class="st">"70+"</span>,</span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.ordered</span>(),</span>
-<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>        <span class="at">Sexo =</span> Sexo <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>            <span class="st">"M"</span> <span class="sc">~</span> <span class="st">"Masculino"</span>, </span>
-<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>            <span class="st">"F"</span> <span class="sc">~</span> <span class="st">"Feminino"</span></span>
-<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>(),</span>
-<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>        <span class="at">Cor =</span> Cor <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
-<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>            <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Não declarado"</span>, </span>
-<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Branca"</span>,       </span>
-<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Preta"</span>,     </span>
-<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>            <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Parda"</span>,</span>
-<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>            <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Amarela"</span>,    </span>
-<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>            <span class="dv">5</span> <span class="sc">~</span> <span class="st">"Indígena"</span>,</span>
-<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>            <span class="dv">6</span> <span class="sc">~</span> <span class="st">"Não declarado"</span></span>
-<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>(),</span>
-<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>        Médio <span class="ot">=</span> Médio <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
-<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Concluído"</span>, </span>
-<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Será concluído este ano"</span>,</span>
-<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>            <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Cursando"</span>,  </span>
-<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>            <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Não concluíu"</span></span>
-<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>(),</span>
-<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>        <span class="at">Ensino =</span> Ensino <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
-<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Público"</span>,</span>
-<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>            <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Privado"</span>, </span>
-<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Não declarado"</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        inscrição      <span class="ot">=</span> NU_INSCRICAO,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        região         <span class="ot">=</span> CO_MUNICIPIO_PROVA, </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">estado         =</span> SG_UF_PROVA, </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        município      <span class="ot">=</span> NO_MUNICIPIO_PROVA,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">idade          =</span> TP_FAIXA_ETARIA,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">sexo           =</span> TP_SEXO, </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">estado_civil   =</span> TP_ESTADO_CIVIL,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">cor            =</span> TP_COR_RACA,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">nacionalidade  =</span> TP_NACIONALIDADE,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        situação_médio <span class="ot">=</span> TP_ST_CONCLUSAO,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">renda          =</span> Q006, </span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">internet       =</span> Q025,</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">MT             =</span> NU_NOTA_MT, </span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">CN             =</span> NU_NOTA_CN, </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">CH             =</span> NU_NOTA_CH, </span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">LC             =</span> NU_NOTA_LC,</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">R              =</span> NU_NOTA_REDACAO, </span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">R1             =</span> NU_NOTA_COMP1,</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">R2             =</span> NU_NOTA_COMP2,</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">R3             =</span> NU_NOTA_COMP3, </span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        <span class="at">R4             =</span> NU_NOTA_COMP4, </span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">R5             =</span> NU_NOTA_COMP5</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">if_all</span>(</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>        MT<span class="sc">:</span>R, <span class="cf">function</span>(x) <span class="sc">!</span><span class="fu">is.na</span>(x)</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">|&gt;</span> </span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>        região <span class="ot">=</span> (região <span class="sc">%/%</span> <span class="fl">1e6</span>) <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Norte"</span>,</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Nordeste"</span>,</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>            <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Sudeste"</span>,</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>            <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Sul"</span>,</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>            <span class="dv">5</span> <span class="sc">~</span> <span class="st">"Centro-Oeste"</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>(),</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>        <span class="at">estado =</span> estado <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>            <span class="st">"AC"</span> <span class="sc">~</span> <span class="st">"Acre"</span>,   </span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>            <span class="st">"AP"</span> <span class="sc">~</span> <span class="st">"Amapá"</span>,</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>            <span class="st">"AM"</span> <span class="sc">~</span> <span class="st">"Amazonas"</span>,</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>            <span class="st">"PA"</span> <span class="sc">~</span> <span class="st">"Pará"</span>,</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>            <span class="st">"RO"</span> <span class="sc">~</span> <span class="st">"Rondônia"</span>,</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>            <span class="st">"RR"</span> <span class="sc">~</span> <span class="st">"Roraima"</span>,</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>            <span class="st">"TO"</span> <span class="sc">~</span> <span class="st">"Tocantins"</span>,</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>            <span class="st">"AL"</span> <span class="sc">~</span> <span class="st">"Alagoas"</span>, </span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>            <span class="st">"BA"</span> <span class="sc">~</span> <span class="st">"Bahia"</span>,</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>            <span class="st">"CE"</span> <span class="sc">~</span> <span class="st">"Ceará"</span>,</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>            <span class="st">"MA"</span> <span class="sc">~</span> <span class="st">"Maranhão"</span>,</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>            <span class="st">"PB"</span> <span class="sc">~</span> <span class="st">"Paraíba"</span>, </span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>            <span class="st">"PE"</span> <span class="sc">~</span> <span class="st">"Pernambuco"</span>,</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>            <span class="st">"PI"</span> <span class="sc">~</span> <span class="st">"Piauí"</span>,     </span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>            <span class="st">"RN"</span> <span class="sc">~</span> <span class="st">"Rio Grande do Norte"</span>,</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SE"</span> <span class="sc">~</span> <span class="st">"Sergipe"</span>,</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>            <span class="st">"ES"</span> <span class="sc">~</span> <span class="st">"Espírito Santo"</span>,  </span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>            <span class="st">"MG"</span> <span class="sc">~</span> <span class="st">"Minas Gerais"</span>,</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>            <span class="st">"RJ"</span> <span class="sc">~</span> <span class="st">"Rio de Janeiro"</span>,</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SP"</span> <span class="sc">~</span> <span class="st">"São Paulo"</span>,</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>            <span class="st">"PR"</span> <span class="sc">~</span> <span class="st">"Paraná"</span>,         </span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>            <span class="st">"SC"</span> <span class="sc">~</span> <span class="st">"Santa Catarina"</span>,</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>            <span class="st">"RS"</span> <span class="sc">~</span> <span class="st">"Rio Grande do Sul"</span>,</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>            <span class="st">"DF"</span> <span class="sc">~</span> <span class="st">"Distrito Federal"</span>, </span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>            <span class="st">"GO"</span> <span class="sc">~</span> <span class="st">"Goiás"</span>,</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>            <span class="st">"MT"</span> <span class="sc">~</span> <span class="st">"Mato Grosso"</span>,     </span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>            <span class="st">"MS"</span> <span class="sc">~</span> <span class="st">"Mato Grosso do Sul"</span>,</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>(),</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>        <span class="at">idade =</span> idade <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span>  <span class="sc">~</span> <span class="st">"0-17"</span>, </span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span>  <span class="sc">~</span> <span class="st">"17"</span>,</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>            <span class="dv">3</span>  <span class="sc">~</span> <span class="st">"18"</span>,  </span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>            <span class="dv">4</span>  <span class="sc">~</span> <span class="st">"19"</span>,</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>            <span class="dv">5</span>  <span class="sc">~</span> <span class="st">"20"</span>,  </span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>            <span class="dv">6</span>  <span class="sc">~</span> <span class="st">"21"</span>,   </span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>            <span class="dv">7</span>  <span class="sc">~</span> <span class="st">"22"</span>,  </span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>            <span class="dv">8</span>  <span class="sc">~</span> <span class="st">"23"</span>,</span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>            <span class="dv">9</span>  <span class="sc">~</span> <span class="st">"24"</span>,  </span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>            <span class="dv">10</span> <span class="sc">~</span> <span class="st">"25"</span>, </span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>            <span class="dv">11</span> <span class="sc">~</span> <span class="st">"26-30"</span>, </span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>            <span class="dv">12</span> <span class="sc">~</span> <span class="st">"31-35"</span>,</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>            <span class="dv">13</span> <span class="sc">~</span> <span class="st">"36-40"</span>, </span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>            <span class="dv">14</span> <span class="sc">~</span> <span class="st">"41-45"</span>, </span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>            <span class="dv">15</span> <span class="sc">~</span> <span class="st">"46-50"</span>, </span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>            <span class="dv">16</span> <span class="sc">~</span> <span class="st">"51-55"</span>,</span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>            <span class="dv">17</span> <span class="sc">~</span> <span class="st">"56-60"</span>,</span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>            <span class="dv">18</span> <span class="sc">~</span> <span class="st">"61-65"</span>, </span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>            <span class="dv">19</span> <span class="sc">~</span> <span class="st">"66-70"</span>, </span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>            <span class="dv">20</span> <span class="sc">~</span> <span class="st">"70+"</span>,</span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.ordered</span>(),</span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>        <span class="at">sexo =</span> sexo <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>            <span class="st">"M"</span> <span class="sc">~</span> <span class="st">"Masculino"</span>, </span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>            <span class="st">"F"</span> <span class="sc">~</span> <span class="st">"Feminino"</span></span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>(),</span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>        <span class="at">estado_civil =</span> estado_civil <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>            <span class="dv">0</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Solteiro"</span>,</span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Casado"</span>,</span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>            <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Divorciado"</span>,</span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>            <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Viúvo"</span></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>(),</span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>        <span class="at">cor =</span> cor <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>            <span class="dv">0</span> <span class="sc">~</span> <span class="cn">NA</span>, </span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Branca"</span>,</span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Preta"</span>,</span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>            <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Parda"</span>,</span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>            <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Amarela"</span>,</span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>            <span class="dv">5</span> <span class="sc">~</span> <span class="st">"Indígena"</span>,</span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>            <span class="dv">6</span> <span class="sc">~</span> <span class="cn">NA</span></span>
 <span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>(),</span>
-<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>        <span class="at">Renda =</span> Renda <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
-<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>            <span class="st">"A"</span> <span class="sc">~</span> <span class="st">"0"</span>,           </span>
-<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>            <span class="st">"B"</span> <span class="sc">~</span> <span class="st">"0-1100"</span>,     </span>
-<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a>            <span class="st">"C"</span> <span class="sc">~</span> <span class="st">"1100-1650"</span>,</span>
-<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>            <span class="st">"D"</span> <span class="sc">~</span> <span class="st">"1650-2200"</span>,   </span>
-<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>            <span class="st">"E"</span> <span class="sc">~</span> <span class="st">"2200-2750"</span>,   </span>
-<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>            <span class="st">"F"</span> <span class="sc">~</span> <span class="st">"2750-3300"</span>,</span>
-<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>            <span class="st">"G"</span> <span class="sc">~</span> <span class="st">"3300-4400"</span>,  </span>
-<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a>            <span class="st">"H"</span> <span class="sc">~</span> <span class="st">"4400-5500"</span>, </span>
-<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a>            <span class="st">"I"</span> <span class="sc">~</span> <span class="st">"5500-6600"</span>,</span>
-<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a>            <span class="st">"J"</span> <span class="sc">~</span> <span class="st">"6600-7700"</span>,   </span>
-<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a>            <span class="st">"K"</span> <span class="sc">~</span> <span class="st">"7700-8800"</span>,   </span>
-<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a>            <span class="st">"L"</span> <span class="sc">~</span> <span class="st">"8800-9900"</span>,</span>
-<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a>            <span class="st">"M"</span> <span class="sc">~</span> <span class="st">"9900-11000"</span>,  </span>
-<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a>            <span class="st">"N"</span> <span class="sc">~</span> <span class="st">"11000-13200"</span>, </span>
-<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a>            <span class="st">"O"</span> <span class="sc">~</span> <span class="st">"13200-16500"</span>,</span>
-<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a>            <span class="st">"P"</span> <span class="sc">~</span> <span class="st">"16500-22000"</span>,</span>
-<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Q"</span> <span class="sc">~</span> <span class="st">"22000+"</span></span>
-<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.ordered</span>(),</span>
-<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a>        <span class="at">Internet =</span> Internet <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
-<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a>            <span class="st">"A"</span> <span class="sc">~</span> <span class="st">"Não"</span>,</span>
-<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a>            <span class="st">"B"</span> <span class="sc">~</span> <span class="st">"Sim"</span> </span>
-<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>()</span>
-<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>microdados <span class="sc">|&gt;</span>  </span>
-<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a>    arrow<span class="sc">::</span><span class="fu">write_dataset</span>(</span>
-<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>        <span class="at">path =</span> <span class="st">"dados"</span>,</span>
-<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>        <span class="at">format =</span> <span class="st">"parquet"</span>,</span>
-<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>        <span class="at">basename_template =</span> <span class="st">"microdados{i}.parquet"</span></span>
-<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>        <span class="at">nacionalidade =</span> nacionalidade <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>            <span class="dv">0</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Brasileiro"</span>,</span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Brasileiro naturalizado"</span>,</span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>            <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Estrangeiro"</span>,</span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>            <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Brasileiro nascido no exterior"</span> </span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>(),</span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>        situação_médio <span class="ot">=</span> situação_médio <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a>            <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Concluído"</span>, </span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Será concluído em 2021"</span>,</span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a>            <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Será concluído após 2021"</span>,  </span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a>            <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Não concluíu"</span></span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>(),</span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a>        <span class="at">renda =</span> renda <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a>            <span class="st">"A"</span> <span class="sc">~</span> <span class="st">"0"</span>,           </span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a>            <span class="st">"B"</span> <span class="sc">~</span> <span class="st">"0-1100"</span>,     </span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a>            <span class="st">"C"</span> <span class="sc">~</span> <span class="st">"1100-1650"</span>,</span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a>            <span class="st">"D"</span> <span class="sc">~</span> <span class="st">"1650-2200"</span>,   </span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a>            <span class="st">"E"</span> <span class="sc">~</span> <span class="st">"2200-2750"</span>,   </span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a>            <span class="st">"F"</span> <span class="sc">~</span> <span class="st">"2750-3300"</span>,</span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a>            <span class="st">"G"</span> <span class="sc">~</span> <span class="st">"3300-4400"</span>,  </span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a>            <span class="st">"H"</span> <span class="sc">~</span> <span class="st">"4400-5500"</span>, </span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a>            <span class="st">"I"</span> <span class="sc">~</span> <span class="st">"5500-6600"</span>,</span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a>            <span class="st">"J"</span> <span class="sc">~</span> <span class="st">"6600-7700"</span>,   </span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a>            <span class="st">"K"</span> <span class="sc">~</span> <span class="st">"7700-8800"</span>,   </span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a>            <span class="st">"L"</span> <span class="sc">~</span> <span class="st">"8800-9900"</span>,</span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a>            <span class="st">"M"</span> <span class="sc">~</span> <span class="st">"9900-11000"</span>,  </span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>            <span class="st">"N"</span> <span class="sc">~</span> <span class="st">"11000-13200"</span>, </span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a>            <span class="st">"O"</span> <span class="sc">~</span> <span class="st">"13200-16500"</span>,</span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>            <span class="st">"P"</span> <span class="sc">~</span> <span class="st">"16500-22000"</span>,</span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Q"</span> <span class="sc">~</span> <span class="st">"22000+"</span></span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.ordered</span>(),</span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>        <span class="at">internet =</span> internet <span class="sc">|&gt;</span> <span class="fu">case_match</span>(</span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>            <span class="st">"A"</span> <span class="sc">~</span> <span class="st">"Não"</span>,</span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>            <span class="st">"B"</span> <span class="sc">~</span> <span class="st">"Sim"</span> </span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">|&gt;</span> <span class="fu">as.factor</span>()</span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a>microdados <span class="sc">|&gt;</span>  </span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a>    arrow<span class="sc">::</span><span class="fu">write_dataset</span>(</span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a>        <span class="at">path =</span> <span class="st">"dados"</span>,</span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a>        <span class="at">format =</span> <span class="st">"parquet"</span>,</span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a>        <span class="at">basename_template =</span> <span class="st">"microdados{i}.parquet"</span></span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
