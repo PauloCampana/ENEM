@@ -7,38 +7,10 @@
     "text": "Prefácio\nkek\n\n1 + 1\n\n[1] 2"
   },
   {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introduction",
-    "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
-  },
-  {
-    "objectID": "summary.html",
-    "href": "summary.html",
-    "title": "2  Summary",
-    "section": "",
-    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
-  },
-  {
     "objectID": "processamento.html",
     "href": "processamento.html",
     "title": "\n1  Processamento de dados\n",
     "section": "",
     "text": "library(tidyverse)\n\n\nmicrodados <- \"dados/microdados.csv\" |>\n    vroom::vroom(\n        locale = locale(encoding = \"ISO-8859-1\"),\n        show_col_types = FALSE\n    ) |> \n    select(\n        Região    = CO_MUNICIPIO_PROVA, \n        Estado    = SG_UF_PROVA, \n        Município = NO_MUNICIPIO_PROVA,\n        Idade     = TP_FAIXA_ETARIA,\n        Sexo      = TP_SEXO, \n        Cor       = TP_COR_RACA,\n        Médio     = TP_ST_CONCLUSAO, \n        Ensino    = TP_ESCOLA, \n        Renda     = Q006, \n        Internet  = Q025,\n        MT        = NU_NOTA_MT, \n        CN        = NU_NOTA_CN, \n        CH        = NU_NOTA_CH, \n        LC        = NU_NOTA_LC,\n        R         = NU_NOTA_REDACAO, \n        R1        = NU_NOTA_COMP1,\n        R2        = NU_NOTA_COMP2,\n        R3        = NU_NOTA_COMP3, \n        R4        = NU_NOTA_COMP4, \n        R5        = NU_NOTA_COMP5\n    ) |> \n    drop_na() |> \n    mutate(\n        Região = Região |> substring(1,1) |> case_match(\n            \"1\" ~ \"Norte\",\n            \"2\" ~ \"Nordeste\",\n            \"3\" ~ \"Sudeste\",\n            \"4\" ~ \"Sul\",\n            \"5\" ~ \"Centro-Oeste\"\n        ) |> as.factor(),\n        Estado = Estado |> case_match(\n            \"AC\" ~ \"Acre\",   \n            \"AP\" ~ \"Amapá\",\n            \"AM\" ~ \"Amazonas\",\n            \"PA\" ~ \"Pará\",\n            \"RO\" ~ \"Rondônia\",\n            \"RR\" ~ \"Roraima\",\n            \"TO\" ~ \"Tocantins\",\n            \"AL\" ~ \"Alagoas\", \n            \"BA\" ~ \"Bahia\",\n            \"CE\" ~ \"Ceará\",\n            \"MA\" ~ \"Maranhão\",\n            \"PB\" ~ \"Paraíba\", \n            \"PE\" ~ \"Pernambuco\",\n            \"PI\" ~ \"Piauí\",     \n            \"RN\" ~ \"Rio Grande do Norte\",\n            \"SE\" ~ \"Sergipe\",\n            \"ES\" ~ \"Espírito Santo\",  \n            \"MG\" ~ \"Minas Gerais\",\n            \"RJ\" ~ \"Rio de Janeiro\",\n            \"SP\" ~ \"São Paulo\",\n            \"PR\" ~ \"Paraná\",         \n            \"SC\" ~ \"Santa Catarina\",\n            \"RS\" ~ \"Rio Grande do Sul\",\n            \"DF\" ~ \"Distrito Federal\", \n            \"GO\" ~ \"Goiás\",\n            \"MT\" ~ \"Mato Grosso\",     \n            \"MS\" ~ \"Mato Grosso do Sul\",\n        ) |> as.factor(),\n        Idade = Idade |> case_match(\n            1  ~ \"0-17\", \n            2  ~ \"17\",\n            3  ~ \"18\",  \n            4  ~ \"19\",\n            5  ~ \"20\",  \n            6  ~ \"21\",   \n            7  ~ \"22\",  \n            8  ~ \"23\",\n            9  ~ \"24\",  \n            10 ~ \"25\", \n            11 ~ \"26-30\", \n            12 ~ \"31-35\",\n            13 ~ \"36-40\", \n            14 ~ \"41-45\", \n            15 ~ \"46-50\", \n            16 ~ \"51-55\",\n            17 ~ \"56-60\",\n            18 ~ \"61-65\", \n            19 ~ \"66-70\", \n            20 ~ \"70+\",\n        ) |> as.ordered(),\n        Sexo = Sexo |> case_match(\n            \"M\" ~ \"Masculino\", \n            \"F\" ~ \"Feminino\"\n        ) |> as.factor(),\n        Cor = Cor |> case_match(\n            0 ~ \"Não declarado\", \n            1 ~ \"Branca\",       \n            2 ~ \"Preta\",     \n            3 ~ \"Parda\",\n            4 ~ \"Amarela\",    \n            5 ~ \"Indígena\",\n            6 ~ \"Não declarado\"\n        ) |> as.factor(),\n        Médio = Médio |> case_match(\n            1 ~ \"Concluído\", \n            2 ~ \"Será concluído este ano\",\n            3 ~ \"Cursando\",  \n            4 ~ \"Não concluíu\"\n        ) |> as.factor(),\n        Ensino = Ensino |> case_match(\n            2 ~ \"Público\",\n            3 ~ \"Privado\", \n            1 ~ \"Não declarado\"\n        ) |> as.factor(),\n        Renda = Renda |> case_match(\n            \"A\" ~ \"0\",           \n            \"B\" ~ \"0-1100\",     \n            \"C\" ~ \"1100-1650\",\n            \"D\" ~ \"1650-2200\",   \n            \"E\" ~ \"2200-2750\",   \n            \"F\" ~ \"2750-3300\",\n            \"G\" ~ \"3300-4400\",  \n            \"H\" ~ \"4400-5500\", \n            \"I\" ~ \"5500-6600\",\n            \"J\" ~ \"6600-7700\",   \n            \"K\" ~ \"7700-8800\",   \n            \"L\" ~ \"8800-9900\",\n            \"M\" ~ \"9900-11000\",  \n            \"N\" ~ \"11000-13200\", \n            \"O\" ~ \"13200-16500\",\n            \"P\" ~ \"16500-22000\",\n            \"Q\" ~ \"22000+\"\n        ) |> as.ordered(),\n        Internet = Internet |> case_match(\n            \"A\" ~ \"Não\",\n            \"B\" ~ \"Sim\" \n        ) |> as.factor()\n    )\n\n\nmicrodados |>  \n    arrow::write_dataset(\n        path = \"dados\",\n        format = \"parquet\",\n        basename_template = \"microdados{i}.parquet\"\n    )"
-  },
-  {
-    "objectID": "análise.html",
-    "href": "análise.html",
-    "title": "\n2  Análise\n",
-    "section": "",
-    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
   }
 ]

@@ -6,5 +6,5 @@
 .Rdata
 .httr-oauth
 .DS_Store
-.csv
-dados/microdados.csv
+/dados/*.csv
+*_cache/

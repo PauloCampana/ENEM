@@ -1,36 +1,31 @@
 project:
   type: book
+  output-dir: docs
 
 book:
-  title: "ENEM"
-  subtitle: "Análise dos microdados ENEM 2021"
-  author: "Paulo Ricardo Seganfredo Campana"
+  title: ENEM
+  subtitle: Análise dos microdados ENEM 2021
+  author: Paulo Ricardo Seganfredo Campana
   date: today
   chapters:
     - index.qmd
     - processamento.qmd
     - análise.qmd
     - referências.qmd
-
-format:
-  html:
-    theme:
-      - darkly
-      - custom.scss
-
-execute:
-  cache: true
+  repo-url: https://github.com/PauloCampana/ENEM
+  cover-image: _cover.png
+  sidebar:
+    background: "#21252b"
 
 lang: pt
 bibliography: references.bib
+cache: true
 
+theme: [darkly, _custom.scss]
 backgroundcolor: "#282c34"
-monofont: "Ubuntu Mono"
-fontsize: 20px
-
-code-link: true
-code-tools: true
 code-block-bg: "#21252b"
 code-block-border-left: "#00bc8c"
 highlight-style: atom-one
+code-link: true
+code-tools: true
 
