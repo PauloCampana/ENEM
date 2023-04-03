@@ -1,0 +1,153 @@
+# Processamento de dados
+
+```{r}
+#| warning: false
+library(tidyverse)
+```
+
+```{r}
+microdados <- "dados/microdados.csv" |>
+    vroom::vroom(
+        locale = locale(encoding = "ISO-8859-1"),
+        show_col_types = FALSE
+    ) |> 
+    select(
+        Região    = CO_MUNICIPIO_PROVA, 
+        Estado    = SG_UF_PROVA, 
+        Município = NO_MUNICIPIO_PROVA,
+        Idade     = TP_FAIXA_ETARIA,
+        Sexo      = TP_SEXO, 
+        Cor       = TP_COR_RACA,
+        Médio     = TP_ST_CONCLUSAO, 
+        Ensino    = TP_ESCOLA, 
+        Renda     = Q006, 
+        Internet  = Q025,
+        MT        = NU_NOTA_MT, 
+        CN        = NU_NOTA_CN, 
+        CH        = NU_NOTA_CH, 
+        LC        = NU_NOTA_LC,
+        R         = NU_NOTA_REDACAO, 
+        R1        = NU_NOTA_COMP1,
+        R2        = NU_NOTA_COMP2,
+        R3        = NU_NOTA_COMP3, 
+        R4        = NU_NOTA_COMP4, 
+        R5        = NU_NOTA_COMP5
+    ) |> 
+    drop_na() |> 
+    mutate(
+        Região = Região |> substring(1,1) |> case_match(
+            "1" ~ "Norte",
+            "2" ~ "Nordeste",
+            "3" ~ "Sudeste",
+            "4" ~ "Sul",
+            "5" ~ "Centro-Oeste"
+        ) |> as.factor(),
+        Estado = Estado |> case_match(
+            "AC" ~ "Acre",   
+            "AP" ~ "Amapá",
+            "AM" ~ "Amazonas",
+            "PA" ~ "Pará",
+            "RO" ~ "Rondônia",
+            "RR" ~ "Roraima",
+            "TO" ~ "Tocantins",
+            "AL" ~ "Alagoas", 
+            "BA" ~ "Bahia",
+            "CE" ~ "Ceará",
+            "MA" ~ "Maranhão",
+            "PB" ~ "Paraíba", 
+            "PE" ~ "Pernambuco",
+            "PI" ~ "Piauí",     
+            "RN" ~ "Rio Grande do Norte",
+            "SE" ~ "Sergipe",
+            "ES" ~ "Espírito Santo",  
+            "MG" ~ "Minas Gerais",
+            "RJ" ~ "Rio de Janeiro",
+            "SP" ~ "São Paulo",
+            "PR" ~ "Paraná",         
+            "SC" ~ "Santa Catarina",
+            "RS" ~ "Rio Grande do Sul",
+            "DF" ~ "Distrito Federal", 
+            "GO" ~ "Goiás",
+            "MT" ~ "Mato Grosso",     
+            "MS" ~ "Mato Grosso do Sul",
+        ) |> as.factor(),
+        Idade = Idade |> case_match(
+            1  ~ "0-17", 
+            2  ~ "17",
+            3  ~ "18",  
+            4  ~ "19",
+            5  ~ "20",  
+            6  ~ "21",   
+            7  ~ "22",  
+            8  ~ "23",
+            9  ~ "24",  
+            10 ~ "25", 
+            11 ~ "26-30", 
+            12 ~ "31-35",
+            13 ~ "36-40", 
+            14 ~ "41-45", 
+            15 ~ "46-50", 
+            16 ~ "51-55",
+            17 ~ "56-60",
+            18 ~ "61-65", 
+            19 ~ "66-70", 
+            20 ~ "70+",
+        ) |> as.ordered(),
+        Sexo = Sexo |> case_match(
+            "M" ~ "Masculino", 
+            "F" ~ "Feminino"
+        ) |> as.factor(),
+        Cor = Cor |> case_match(
+            0 ~ "Não declarado", 
+            1 ~ "Branca",       
+            2 ~ "Preta",     
+            3 ~ "Parda",
+            4 ~ "Amarela",    
+            5 ~ "Indígena",
+            6 ~ "Não declarado"
+        ) |> as.factor(),
+        Médio = Médio |> case_match(
+            1 ~ "Concluído", 
+            2 ~ "Será concluído este ano",
+            3 ~ "Cursando",  
+            4 ~ "Não concluíu"
+        ) |> as.factor(),
+        Ensino = Ensino |> case_match(
+            2 ~ "Público",
+            3 ~ "Privado", 
+            1 ~ "Não declarado"
+        ) |> as.factor(),
+        Renda = Renda |> case_match(
+            "A" ~ "0",           
+            "B" ~ "0-1100",     
+            "C" ~ "1100-1650",
+            "D" ~ "1650-2200",   
+            "E" ~ "2200-2750",   
+            "F" ~ "2750-3300",
+            "G" ~ "3300-4400",  
+            "H" ~ "4400-5500", 
+            "I" ~ "5500-6600",
+            "J" ~ "6600-7700",   
+            "K" ~ "7700-8800",   
+            "L" ~ "8800-9900",
+            "M" ~ "9900-11000",  
+            "N" ~ "11000-13200", 
+            "O" ~ "13200-16500",
+            "P" ~ "16500-22000",
+            "Q" ~ "22000+"
+        ) |> as.ordered(),
+        Internet = Internet |> case_match(
+            "A" ~ "Não",
+            "B" ~ "Sim" 
+        ) |> as.factor()
+    )
+```
+
+```{r}
+microdados |>  
+    arrow::write_dataset(
+        path = "dados",
+        format = "parquet",
+        basename_template = "microdados{i}.parquet"
+    )
+```
