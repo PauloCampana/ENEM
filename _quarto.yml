@@ -9,17 +9,17 @@ book:
   date: today
   chapters:
     - index.qmd
-    - processamento.qmd
-    - análise.qmd
-    - referências.qmd
+    - 1-limpeza.qmd
+    - 2-análise-exploratória.qmd
   repo-url: https://github.com/PauloCampana/ENEM
   cover-image: _cover.png
   sidebar:
     background: "#21252b"
 
 lang: pt
-bibliography: references.bib
 cache: true
+fig-width: 8
+fig-height: 6
 
 theme: [darkly, _custom.scss]
 backgroundcolor: "#282c34"
@@ -28,4 +28,3 @@ code-block-border-left: "#00bc8c"
 highlight-style: atom-one
 code-link: true
 code-tools: true
-
