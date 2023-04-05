@@ -1,7 +1,5 @@
 # Análise exploratória de dados
 
-regular text here nothing to see officer
-
 ```{r}
 #| warning: false
 library(tidyverse)
@@ -14,45 +12,39 @@ microdados <- "dados/microdados0.parquet" |>
 ```
 
 ```{r}
-theme_darkly <- function(b = "#21252b", d = "#282c34", t = "#ffffff") {
+theme_darkly <- function() {
     theme(
-        rect = element_rect(fill = b, linewidth = 0),
-        panel.background = element_blank(),
-        strip.background = element_blank(),
-        legend.key       = element_blank(),
-        panel.grid.major = element_line(colour = d),
+        rect             = element_blank(),
+        plot.background  = element_rect(fill = "#21252b", linewidth = 0),
+        panel.grid.major = element_line(colour = "#282c34"),
         panel.grid.minor = element_blank(),
-        text             = element_text(colour = t),
-        axis.text        = element_text(colour = t),
-        axis.title       = element_text(colour = t, size = 12),
-        legend.title     = element_text(colour = t, size = 12),
-        strip.text       = element_text(colour = t, size = 12),
+        text             = element_text(colour = "#ffffff", size = 12),
+        axis.text        = element_text(colour = "#ffffff", size = 10),
+        strip.text       = element_text(colour = "#ffffff", size = 12),
         strip.placement  = "outside"
     )
 }
 ```
 
 ```{r}
-#| out-width: 100%
-microdados |>
+microdados |> 
     select(sexo, MT:R) |>
-    rename(
-        "Matemática"              = MT,
-        "Ciências da \n Natureza" = CN,
-        "Ciência \n Humanas"      = CH,
-        "Linguagens \n e Códigos" = LC,
-        "Redação"                 = R
-    ) |>
-    pivot_longer(-sexo, names_to = "área", values_to = "nota") |>
-    ggplot(aes(x = nota, fill = sexo, color = sexo)) +
+    pivot_longer(MT:R, names_to = "área", values_to = "notas") |>
+    mutate(área = case_match(área,
+        "MT" ~ "Matemática",
+        "CN" ~ "Ciências da \n Natureza",
+        "CH" ~ "Ciência \n Humanas",
+        "LC" ~ "Linguagens \n e Códigos",
+        "R"  ~ "Redação",
+    )) |> 
+    ggplot(aes(x = notas, fill = sexo, colour = sexo)) +
     geom_density(alpha = 1/3) +
     facet_grid(rows = vars(área), switch = "y") +
     scale_colour_manual(
         values = c("#ff4080", "#4080ff"),
-        aesthetics = c("colour", "fill")
+        aesthetics = c("fill", "colour")
     ) +
-    coord_cartesian(xlim = c(300, 1000)) +
-    scale_x_continuous(breaks = seq(300, 1000, by = 100)) +
+    scale_x_continuous(breaks = seq(0, 1000, by = 100)) +
     labs(x = "Notas") +
     guides(
         fill = guide_legend(title = "Sexo"),
@@ -66,21 +58,64 @@ microdados |>
 ```
 
 ```{r}
-microdados |>
+#| warning: false
+microdados |> 
     filter(R != 0) |>
-    select(idade, MT:R) |>
-    transmute(
-        idade = idade,
-        nota = (MT + CN + CH + LC + R) / 5
-    ) |>
-    ggplot(aes(x = nota, y = idade, fill = idade, color = idade)) +
-    ggridges::geom_density_ridges(rel_min_height = 0.005, scale = 3) +
-    scale_fill_viridis_d(option = "F", begin = 0.25) +
-    scale_color_viridis_d(option = "F", begin = 0) +
-    coord_cartesian(xlim = c(300, 820)) +
-    scale_x_continuous(breaks = seq(300, 800, by = 100)) + 
+    select(idade, MT:R) |> 
+    mutate(notas = (MT + CN + CH + LC + R) / 5) |>
+    ggplot(aes(x = notas, y = idade, color = idade)) +
+    ggridges::geom_density_ridges(scale = 4, alpha = 0) + 
+    scale_color_viridis_d(option = "F", begin = 0.3) +
+    xlim(300, 800) +
     labs(x = "Notas", y = "Idade") +
     theme_darkly() +
     theme(legend.position = "none")
 ```
+
+```{r}
+#| warning: false
+microdados |>
+    filter(R != 0, !is.na(renda)) |>
+    select(renda, MT:R) |>
+    mutate(notas = (MT + CN + CH + LC + R) / 5) |>
+    ggplot(aes(x = notas, y = renda, color = renda)) +
+    ggridges::geom_density_ridges(scale = 4, alpha = 0) +
+    scale_color_viridis_d(option = "G", begin = 0.4, direction = -1) +
+    xlim(300, 800) +
+    labs(x = "Notas", y = "Renda") +
+    theme_darkly() +
+    theme(legend.position = "none")
+```
+
+plot by região, estado
+smth about municipio
+estado civil, maybe junto com sexo
+cor, nacionalidade
+situação_médio, internet
+intercorrelation MT:R5
+
+```{r}
+microdados |> head(10000) |> 
+    select(internet, MT:R) |>
+    pivot_longer(MT:R, names_to = "área", values_to = "notas") |>
+    ggplot(aes(x = notas, fill = internet, colour = internet)) +
+    geom_density(alpha = 1/3) +
+    facet_grid(rows = vars(área), switch = "y") +
+    scale_colour_manual(
+        values = c("#ff8080", "#80ff80"),
+        aesthetics = c("fill", "colour")
+    ) +
+    scale_x_continuous(breaks = seq(0, 1000, by = 100)) +
+    labs(x = "Notas") +
+    guides(
+        fill = guide_legend(title = "Internet"),
+        color = guide_legend(title = "Internet")
+    ) +
+    theme_darkly() +
+    theme(
+        axis.text.y = element_blank(),
+        axis.title.y = element_blank()
+    )
+```
+
 
