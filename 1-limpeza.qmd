@@ -1,7 +1,6 @@
 # Limpeza de dados
 
 ```{r}
-#| warning: false
 library(tidyverse)
 ```
 
@@ -36,7 +35,7 @@ microdados <- "dados/microdados.csv" |>
         R5             = NU_NOTA_COMP5
     ) |> 
     filter(if_all(
-        MT:R, function(x) !is.na(x)
+        c(internet, renda, MT:R), function(x) !is.na(x) & x != 0
     )) |> 
     mutate(
         região = (região %/% 1e6) |> case_match(

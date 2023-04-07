@@ -18,6 +18,7 @@ book:
 
 lang: pt
 cache: true
+warning: false
 
 theme: [darkly, _custom.scss]
 backgroundcolor: "#282c34"
