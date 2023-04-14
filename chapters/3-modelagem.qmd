@@ -1,0 +1,73 @@
+---
+knitr: 
+  opts_chunk: 
+    cache.lazy: false
+---
+
+# Modelagem
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+source("../misc/themes.R")
+```
+
+```{r}
+microdados <- "../dados/microdados0.parquet" |>
+    arrow::read_parquet()
+```
+
+```{r}
+set.seed(0)
+microdados_split <- initial_split(microdados, prop = 3/4)
+microdados_train <- training(microdados_split)
+microdados_test  <-  testing(microdados_split)
+#vfold
+```
+
+```{r}
+microdados_model <- linear_reg() |> 
+    set_engine("lm") |> 
+    set_mode("regression")
+
+microdados_recipe <- microdados_train |> 
+    recipe(LC ~ .) |> 
+    update_role(R, inscrição, região, município, new_role = "id") |> 
+    step_unknown(estado_civil, cor, nacionalidade) |> 
+    step_dummy(all_nominal_predictors()) 
+
+microdados_workflow <- workflow() |> 
+    add_model(microdados_model) |> 
+    add_recipe(microdados_recipe)
+```
+
+```{r}
+microdados_fit <- microdados_workflow |> 
+    fit(microdados_train)
+
+microdados_augment <- microdados_fit |> 
+    augment(microdados_test)
+
+#resample
+
+#microdados_last_fit <- microdados_workflow |> 
+#    last_fit(microdados_split)
+#
+#microdados_predictions <- microdados_last_fit |> 
+#    collect_predictions()
+#
+#microdados_predictions |> collect_metrics()
+```
+
+```{r}
+microdados_augment |> head(50000) |> 
+    mutate(diff = abs(LC - .pred)) |> 
+    ggplot(aes(x = LC, y = .pred, color = diff)) +
+    geom_point(size = 0.01) +
+    geom_abline(linetype = 5, colour = "#ffffff") +
+    scale_color_viridis_c(option = "G", begin = 0.3) +
+    coord_obs_pred() +
+    theme_darkly
+
+metrics(microdados_augment, truth = LC, estimate = .pred)
+```

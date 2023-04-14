@@ -7,4 +7,5 @@
 .httr-oauth
 .DS_Store
 /dados/*.csv
-/*_cache/
+/chapters/*_cache/
+/chapters/*_files/

@@ -1,0 +1,182 @@
+# Análise exploratória de dados
+
+```{r}
+library(tidyverse)
+library(reactablefmtr)
+source("../misc/themes.R")
+```
+
+```{r}
+microdados <- "../dados/microdados0.parquet" |>
+    arrow::open_dataset() |>
+    collect()
+```
+
+```{r}
+microdados_tabela <- microdados |>
+    select(região, estado, MT:R) |>
+    summarise(
+        across(MT:R, function(x) round(mean(x))),
+        .by = c(região, estado)
+    ) 
+
+microdados_mapa <- "../dados/mapa/estados.shp" |>
+    sf::read_sf() |> 
+    sf::st_simplify(preserveTopology = TRUE, dTolerance = 100)
+
+microdados_mapa_pivot <- microdados_mapa |> 
+    left_join(
+        microdados |> 
+            summarise(across(MT:R, mean), .by = estado) |> 
+            pivot_longer(MT:R, names_to = "área", values_to = "notas"),
+        join_by(nome == estado)
+    ) 
+
+microdados_mapa_notas <- microdados_mapa |> 
+    left_join(
+        microdados |> 
+            summarise(notas = mean(c(MT, CN, CH, LC, R)), .by = estado),
+        join_by(nome == estado)
+    ) 
+
+microdados_pivot <- microdados |> 
+    select(sexo, internet, MT:R) |> 
+    pivot_longer(MT:R, names_to = "área", values_to = "notas")
+
+microdados_notas <- microdados |> 
+    select(idade, renda, MT:R) |> 
+    mutate(notas = (MT + CN + CH + LC + R) / 5, .keep = "unused")
+```
+
+```{r}
+col_def_data_bars <- function(column, colour) {
+    colDef(
+        cell = data_bars(
+            data = microdados_tabela,
+            text_position = "above", text_color = "#ffffff",
+            background = "#282c34", fill_color = colour,
+            min_value = min(microdados_tabela[column]) - 10,
+    ))
+}
+```
+
+```{r tabela}
+#| out-width: 100%
+#| column: page-right
+microdados_tabela |> 
+    reactable(
+        pagination = FALSE, compact = TRUE, 
+        bordered = TRUE, highlight = TRUE, 
+        showSortable = TRUE,
+        defaultSortOrder = "desc", defaultSorted = "MT",
+        theme = theme_darkly_table,
+        defaultColDef = colDef(align = "left"),
+        columns = list(
+            "região" = colDef(name = "Região"),
+            "estado" = colDef(name = "Estado", width = 180),
+            "MT" = col_def_data_bars("MT", "#80c0f0"),
+            "CN" = col_def_data_bars("CN", "#a0f0a0"),
+            "CH" = col_def_data_bars("CH", "#f0c080"),
+            "LC" = col_def_data_bars("LC", "#f080c0"),
+            "R"  = col_def_data_bars("R",  "#f0a0a0")
+        )
+    )
+```
+
+```{r mapa pivot}
+#| out-width: 100%
+#| fig-height: 1.48
+microdados_mapa_pivot |> 
+    ggplot(aes(fill = notas)) +
+    geom_sf(colour = "#000000", linewidth = 0.1) +
+    coord_sf(expand = FALSE) +
+    facet_grid(cols = vars(área)) +
+    scale_fill_viridis_c(
+        name = "Notas",
+        guide = guide_colourbar(ticks = FALSE)
+    ) +
+    theme_darkly +
+    theme_map
+```
+
+```{r mapa notas}
+#| out-width: 100%
+#| fig-height: 5.515
+microdados_mapa_notas |> 
+    ggplot(aes(fill = notas)) +
+    geom_sf(colour = "#000000", linewidth = 0.2) +
+    coord_sf(expand = FALSE) +
+    scale_fill_viridis_c(
+        name = "Notas",
+        guide = guide_colourbar(ticks = FALSE)
+    ) +
+    theme_darkly +
+    theme_map
+```
+
+```{r sexo}
+#| out-width: 100%
+microdados_pivot |> 
+    ggplot(aes(x = notas, fill = sexo, colour = sexo)) +
+    geom_density(alpha = 1/3) +
+    facet_grid(rows = vars(área), switch = "y", scales = "free") +
+    scale_colour_manual(
+        name = "Sexo",
+        values = c("#ff4080", "#4080ff"),
+        aesthetics = c("fill", "colour")
+    ) +
+    scale_x_continuous(
+        name = "Notas",
+        breaks = seq(0, 1000, by = 100)
+    ) +
+    theme_darkly +
+    theme_density
+```
+
+```{r internet}
+#| out-width: 100%
+microdados_pivot |> 
+    ggplot(aes(x = notas, fill = internet, colour = internet)) +
+    geom_density(alpha = 1/3) +
+    facet_grid(rows = vars(área), switch = "y", scales = "free") +
+    scale_colour_manual(
+        name = "Internet",
+        values = c("#ff8080", "#80ff80"),
+        aesthetics = c("fill", "colour")
+    ) +
+    scale_x_continuous(
+        name = "Notas",
+        breaks = seq(0, 1000, by = 100)
+    ) +
+    theme_darkly +
+    theme_density
+```
+
+```{r idade}
+#| out-width: 100%
+microdados_notas |>
+    ggplot(aes(x = notas, y = idade, colour = idade)) +
+    ggridges::geom_density_ridges(scale = 4, alpha = 0) + 
+    scale_colour_viridis_d(option = "F", begin = 0.3) +
+    lims(x = c(300, 850)) +
+    labs(x = "Notas", y = "Idade") +
+    theme_darkly +
+    theme_ridges
+```
+
+```{r renda}
+#| out-width: 100%
+microdados_notas |>
+    ggplot(aes(x = notas, y = renda, colour = renda)) +
+    ggridges::geom_density_ridges(scale = 4, alpha = 0) +
+    scale_colour_viridis_d(option = "G", begin = 0.4, direction = -1) +
+    lims(x = c(300, 850)) +
+    labs(x = "Notas", y = "Renda") +
+    theme_darkly +
+    theme_ridges
+```
+
+estado civil
+cor
+nacionalidade
+situação_médio
