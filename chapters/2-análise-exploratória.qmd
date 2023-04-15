@@ -1,4 +1,4 @@
-# Análise exploratória de dados
+# Análise exploratória
 
 ```{r}
 library(tidyverse)
@@ -8,8 +8,7 @@ source("../misc/themes.R")
 
 ```{r}
 microdados <- "../dados/microdados0.parquet" |>
-    arrow::open_dataset() |>
-    collect()
+    arrow::read_parquet()
 ```
 
 ```{r}
@@ -49,12 +48,12 @@ microdados_notas <- microdados |>
 ```
 
 ```{r}
-col_def_data_bars <- function(column, colour) {
+col_def_data_bars <- function(column, color) {
     colDef(
         cell = data_bars(
             data = microdados_tabela,
             text_position = "above", text_color = "#ffffff",
-            background = "#282c34", fill_color = colour,
+            background = "#282c34", fill_color = color,
             min_value = min(microdados_tabela[column]) - 10,
     ))
 }
@@ -88,12 +87,12 @@ microdados_tabela |>
 #| fig-height: 1.48
 microdados_mapa_pivot |> 
     ggplot(aes(fill = notas)) +
-    geom_sf(colour = "#000000", linewidth = 0.1) +
+    geom_sf(color = "#000000", linewidth = 0.1) +
     coord_sf(expand = FALSE) +
     facet_grid(cols = vars(área)) +
     scale_fill_viridis_c(
         name = "Notas",
-        guide = guide_colourbar(ticks = FALSE)
+        guide = guide_colorbar(ticks = FALSE)
     ) +
     theme_darkly +
     theme_map
@@ -104,11 +103,11 @@ microdados_mapa_pivot |>
 #| fig-height: 5.515
 microdados_mapa_notas |> 
     ggplot(aes(fill = notas)) +
-    geom_sf(colour = "#000000", linewidth = 0.2) +
+    geom_sf(color = "#000000", linewidth = 0.2) +
     coord_sf(expand = FALSE) +
     scale_fill_viridis_c(
         name = "Notas",
-        guide = guide_colourbar(ticks = FALSE)
+        guide = guide_colorbar(ticks = FALSE)
     ) +
     theme_darkly +
     theme_map
@@ -117,13 +116,13 @@ microdados_mapa_notas |>
 ```{r sexo}
 #| out-width: 100%
 microdados_pivot |> 
-    ggplot(aes(x = notas, fill = sexo, colour = sexo)) +
+    ggplot(aes(x = notas, fill = sexo, color = sexo)) +
     geom_density(alpha = 1/3) +
     facet_grid(rows = vars(área), switch = "y", scales = "free") +
-    scale_colour_manual(
+    scale_color_manual(
         name = "Sexo",
         values = c("#ff4080", "#4080ff"),
-        aesthetics = c("fill", "colour")
+        aesthetics = c("fill", "color")
     ) +
     scale_x_continuous(
         name = "Notas",
@@ -136,13 +135,13 @@ microdados_pivot |>
 ```{r internet}
 #| out-width: 100%
 microdados_pivot |> 
-    ggplot(aes(x = notas, fill = internet, colour = internet)) +
+    ggplot(aes(x = notas, fill = internet, color = internet)) +
     geom_density(alpha = 1/3) +
     facet_grid(rows = vars(área), switch = "y", scales = "free") +
-    scale_colour_manual(
+    scale_color_manual(
         name = "Internet",
         values = c("#ff8080", "#80ff80"),
-        aesthetics = c("fill", "colour")
+        aesthetics = c("fill", "color")
     ) +
     scale_x_continuous(
         name = "Notas",
@@ -155,9 +154,9 @@ microdados_pivot |>
 ```{r idade}
 #| out-width: 100%
 microdados_notas |>
-    ggplot(aes(x = notas, y = idade, colour = idade)) +
+    ggplot(aes(x = notas, y = idade, color = idade)) +
     ggridges::geom_density_ridges(scale = 4, alpha = 0) + 
-    scale_colour_viridis_d(option = "F", begin = 0.3) +
+    scale_color_viridis_d(option = "F", begin = 0.3) +
     lims(x = c(300, 850)) +
     labs(x = "Notas", y = "Idade") +
     theme_darkly +
@@ -167,9 +166,9 @@ microdados_notas |>
 ```{r renda}
 #| out-width: 100%
 microdados_notas |>
-    ggplot(aes(x = notas, y = renda, colour = renda)) +
+    ggplot(aes(x = notas, y = renda, color = renda)) +
     ggridges::geom_density_ridges(scale = 4, alpha = 0) +
-    scale_colour_viridis_d(option = "G", begin = 0.4, direction = -1) +
+    scale_color_viridis_d(option = "G", begin = 0.4, direction = -1) +
     lims(x = c(300, 850)) +
     labs(x = "Notas", y = "Renda") +
     theme_darkly +
