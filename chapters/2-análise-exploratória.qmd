@@ -3,12 +3,8 @@
 ```{r}
 library(tidyverse)
 library(reactablefmtr)
-source("../misc/themes.R")
-```
-
-```{r}
-microdados <- "../dados/microdados0.parquet" |>
-    arrow::read_parquet()
+source("misc/themes.R")
+microdados <- arrow::read_parquet("dados/microdados.parquet")
 ```
 
 ```{r}
@@ -19,7 +15,7 @@ microdados_tabela <- microdados |>
         .by = c(região, estado)
     ) 
 
-microdados_mapa <- "../dados/mapa/estados.shp" |>
+microdados_mapa <- "dados/mapa/estados.shp" |>
     sf::read_sf() |> 
     sf::st_simplify(preserveTopology = TRUE, dTolerance = 100)
 
@@ -174,8 +170,3 @@ microdados_notas |>
     theme_darkly +
     theme_ridges
 ```
-
-estado civil
-cor
-nacionalidade
-situação_médio

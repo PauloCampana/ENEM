@@ -3,38 +3,31 @@
 ```{r}
 library(tidyverse)
 library(tidymodels)
-source("../misc/themes.R")
-```
-
-```{r}
-microdados <- "../dados/microdados0.parquet" |>
-    arrow::read_parquet()
+source("misc/themes.R")
+microdados <- arrow::read_parquet("dados/microdados.parquet")
 ```
 
 ```{r}
 set.seed(0)
-microdados_split <- initial_split(microdados, prop = 3/4)
+microdados_split <- initial_split(microdados)
 microdados_train <- training(microdados_split)
-microdados_test  <-  testing(microdados_split)
-microdados_fold  <- vfold_cv(microdados_train, v = 5)
+microdados_test <- testing(microdados_split)
+microdados_fold <- vfold_cv(microdados_train, v = 5)
 ```
 
 ```{r}
-microdados_model <- linear_reg(
-    penalty = tune(), mixture = tune()
-) |>
-    set_engine("glmnet") |>
-    set_mode("regression")
-
-microdados_recipe <- microdados_train |> 
-    recipe(LC ~ .) |> 
-    update_role(R, inscrição, região, município, new_role = "id") |> 
-    step_unknown(estado_civil, cor, nacionalidade) |> 
-    step_dummy(all_nominal_predictors()) 
-
 microdados_workflow <- workflow() |> 
-    add_model(microdados_model) |> 
-    add_recipe(microdados_recipe)
+    add_model(
+        linear_reg(penalty = tune(), mixture = tune()) |>
+            set_engine("glmnet") |>
+            set_mode("regression")
+    ) |> 
+    add_recipe(
+        recipe(microdados_train, LC ~ .) |> 
+            update_role(R, inscrição, região, município, new_role = "id") |> 
+            step_unknown(estado_civil, cor, nacionalidade) |> 
+            step_dummy(all_nominal_predictors()) 
+    )
 ```
 
 ```{r}
@@ -42,17 +35,19 @@ microdados_grid <- microdados_workflow |>
     extract_parameter_set_dials() |> 
     grid_regular(levels = 6)
 
+doMC::registerDoMC(cores = 4)
+
 microdados_tune <- microdados_workflow |> 
     tune_grid(microdados_fold, grid = microdados_grid)
+    
+foreach::registerDoSEQ()
 ```
 
 ```{r}
 #| out-width: 100%
 microdados_tune |> 
-    unnest(.metrics) |> 
-    group_by(.metric, penalty, mixture) |> 
-    summarise(.estimate = mean(.estimate)) |> 
-    ggplot(aes(x = penalty, y = .estimate)) +
+    collect_metrics() |> 
+    ggplot(aes(x = penalty, y = mean)) +
     geom_line(aes(color = mixture, group = mixture)) +
     facet_grid(vars(.metric), switch = "y", scales = "free") +
     scale_x_log10() +
@@ -78,7 +73,7 @@ microdados_fit_final <- microdados_workflow_final |>
 #| fig-height: 6.055
 microdados_fit_final |> 
     collect_predictions() |> 
-    head(10000) |> 
+    head(20000) |> 
     mutate(diff = abs(LC - .pred)) |> 
     ggplot(aes(x = LC, y = .pred, color = diff)) +
     geom_point(size = 0.01) +
